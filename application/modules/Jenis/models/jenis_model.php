@@ -28,6 +28,12 @@ class jenis_model extends MY_loader
 		$this->db->where($where);
 		$this->db->update($table,$data);
 	}
+	function jumlah()
+	{
+		$query = $this->db->get('jenis');
+		$jumlah = $query->num_rows();
+		return $jumlah;
+	}
 }
 
 ?>
