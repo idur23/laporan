@@ -26,11 +26,7 @@ class laporan_model extends MY_loader
 			JOIN user
 			ON ".'pengaduan.nik'." ".'='." ".'user.nik'."
 			JOIN jenis
-			ON ".'pengaduan.id_jenis'." ".'='." ".'jenis.id'."
-			JOIN kota
-			ON ".'pengaduan.id_kota'." ".'='." ".'kota.id'."
-			JOIN instansi
-			ON ".'pengaduan.id_instansi'." ".'='." ".'instansi.id'."
+			ON ".'pengaduan.id_jenis'." ".'='." ".'jenis.idj'."
 			WHERE id_jenis = '$jenis' AND tanggal_tanggapan BETWEEN '$tanggalawal' AND '$tanggalakhir'
 			ORDER BY tanggal_tanggapan ASC
 			");
