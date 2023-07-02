@@ -10,15 +10,15 @@
 			<?php $this->load->view('Admin/side'); ?>
 			<main class="col-md-9 ms-sm-auto col-lg-8 px-md-1">
 		      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		        <h1 class="h2">Tambah Pegawai</h1>
+		        <h1 class="h2">Petugas & Admin</h1>
 		      </div>
 		      <div class="container">
-		        <h3>Petugas & Admin</h3>
-		        <table class="table" width="100%">
-					<tr>
+		        <table width="100%">
+					<tr align="right">
 						<td><a href="<?php echo base_url('tambah_Petugas/tambah'); ?>"><button class="btn btn-info">Tambah Data</button></td>
 					</tr>
 				</table>
+				<br>
 		        <table id="table" class="table" border="1" cellspacing="0" width="100%">
 		        	<thead>
 		                <tr>
