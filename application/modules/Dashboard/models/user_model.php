@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 
  */
-class dashboard_model extends MY_loader
+class user_model extends MY_loader
 {
 	
 	function ambil_data()
