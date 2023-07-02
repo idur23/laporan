@@ -8,11 +8,11 @@ class Dashboard extends MX_Controller {
 		{
 			$this->load->model(array(
 				'dashboard_model'	=> 'dashboard',
-				// 'upload_model',
-				// 'genre/model_genre'	=> 'genre',
-				// 'jenis/model_jenis'	=> 'jenis',
-				// 'judul/model_judul'	=> 'judul',
-				// 'komik/model_komik'	=> 'komik',
+				'user_model'	=> 'user',
+				'jenis/jenis_model'	=> 'jenis',
+				'tanggapan_admin/tanggapan_admin_model' => 'tanggapan',
+				'pengaduan/pengaduan_model'	=> 'pengaduan',
+				'dashboard_rakyat/dashboard_rakyat_model' => 'rakyat'
 			));
 			$this->load->helper(array('form','url'));
 			$this->load->library('form_validation');
@@ -21,14 +21,11 @@ class Dashboard extends MX_Controller {
 	function index()
 	{
 		$data['user'] = $this->dashboard->ambil_data()->result_array();
-		// $data['genre'] = $this->genre->ambil_data()->result_array();
-		// $data['jenis'] = $this->jenis->ambil_data()->result_array();
-		// $data['komik'] = $this->komik->ambil_data()->result_array();
-		// $data['upload'] = $this->upload_model->ambil_data()->result_array();
-		// $data['total_genre'] = $this->genre->jumlah();
-		// $data['total_jenis'] = $this->jenis->jumlah();
-		// $data['total_judul'] = $this->judul->jumlah();
-		// $data['total_komik'] = $this->komik->jumlah();
+		$data['total_jenis'] = $this->jenis->jumlah();
+		$data['total_petugas'] = $this->user->jumlah();
+		$data['total_tanggapan'] = $this->tanggapan->jumlah();
+		$data['total_pengaduan'] = $this->pengaduan->jumlah();
+		$data['total_rakyat'] = $this->rakyat->jumlah();
 		$this->load->view('dashboard', $data);
 	}
 	function index_user()
