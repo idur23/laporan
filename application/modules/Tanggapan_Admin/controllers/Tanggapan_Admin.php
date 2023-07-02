@@ -57,19 +57,21 @@ class Tanggapan_Admin extends MX_Controller {
 			'tanggapan' => $tanggapan,
 		);
 		$this->tanggapan->input_data($data,'penanggapan');
-		$this->session->set_flashdata('msg','Berhasil Tambah Data');
 		redirect('Tanggapan_Admin');
 	}
 	function hapus($id_tanggapan)
 	{
 		$where = array('id_tanggapan'=> $id_tanggapan);
 		$this->tanggap->hapus_data($where,'penanggapan');
-		$this->session->set_flashdata('msg','Data Berhasil di Hapus');
+		$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
+  Data Berhasil Di Hapus
+</div>');
 		redirect('Tanggapan_Admin');
 	}
 	function edit($id_tanggapan)
 	{
-		$where = array('id_tanggapan' => $id_tanggapan);
+		$where = array('id' => $id_tanggapan);
+		// $data['pengaduan'] = $this->tanggapan->ambil_data($where, 'pengaduan')->result();
 		$data['tanggap'] = $this->tanggap->edit_data($where, 'penanggapan')->result();
 		$this->load->view('more',$data);
 	}
@@ -134,7 +136,7 @@ class Tanggapan_Admin extends MX_Controller {
 		$_id = $this->db->get_where('tb_berkas',['id'=>$id])->row();
 		$query = $this->db->delete('tb_berkas',['id'=>$id]);
 		if($query){
-			unlink("upload/*".$_id->nama_berkas);
+			unlink("upload/".$_id->nama_berkas);
 		}
 		redirect('http://localhost:8080/hmvc2/');
 	}

@@ -7,8 +7,9 @@ class Verifikasi_Petugas extends MX_Controller {
 		parent::__construct();
 		{
 			$this->load->model(array(
-				'Pengaduan/pengaduan_model'	=> 'pengaduan',
-				'Tanggapan_Petugas/tanggapan_petugas_model'	=> 'tanggapan',
+				'Verifikasi_Admin/verifikasi_admin_model' => 'Verifikasi_Admin',
+				'tanggapan_admin/tanggap_model'	=> 'tanggapan',
+				'pengaduan/pengaduan_model'	=> 'pengaduan'
 				// 'upload_model',
 				// 'genre/model_genre'	=> 'genre',
 				// 'jenis/model_jenis'	=> 'jenis',
@@ -21,7 +22,8 @@ class Verifikasi_Petugas extends MX_Controller {
 	}
 	function index()
 	{
-		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
+		$data['pengaduan'] = $this->Verifikasi_Admin->ambil()->result_array();
+		$data['penanggapan'] = $this->tanggapan->ambil_data()->result_array();
 		// $data['genre'] = $this->genre->ambil_data()->result_array();
 		// $data['jenis'] = $this->jenis->ambil_data()->result_array();
 		// $data['komik'] = $this->komik->ambil_data()->result_array();
@@ -117,12 +119,12 @@ class Verifikasi_Petugas extends MX_Controller {
 		}else{
 			$_data = array('upload_data' => $this->upload->data());
 			$data = array(
-				'nama_berkas' => $_data['upload_data']['file_name'],
+				'berkas' => $_data['upload_data']['file_name'],
 				'keterangan_berkas' => $this->input->post('keterangan_berkas'),
 				'type_berkas' => $_data['upload_data']['file_ext'],
 				'ukuran_berkas' => $_data['upload_data']['file_size']
 			);
-			// $data['nama_berkas']		= $this->upload->data("file_name");
+			// $data['berkas']		= $this->upload->data("file_name");
 			// $data['keterangan_berkas']	= $this->input->post('keterangan_berkas');
 			// $data['type_berkas']		= $this->upload->data('file_ext');
 			// $data['ukuran_berkas']		= $this->upload->data('file_size');
@@ -134,6 +136,7 @@ class Verifikasi_Petugas extends MX_Controller {
 	{
 		$_id = $this->db->get_where('pengaduan',['id'=>$id])->row();
 		$query = $this->db->delete('pengaduan',['id'=>$id]);
+		$query = $this->db->delete('penanggapan',['id_pengaduan'=>$id]);
 		if($query){
 			unlink("upload/".$_id->nama_berkas);
 		}
@@ -166,7 +169,7 @@ class Verifikasi_Petugas extends MX_Controller {
 				'isi'			=> $isi,
 				'judul'			=> $judul,
 				'nik'			=> $nik,
-				'nama_berkas'	=> $old,
+				'berkas'	=> $old,
 				'proses'		=> $status
 			);
 			$where = array(
@@ -189,11 +192,11 @@ class Verifikasi_Petugas extends MX_Controller {
 					echo 'Anda Belum Update';
 				}else{
 					$berkas = $this->upload->data('file_name');
-	                unlink("upload/" . $query->nama_berkas);
+	                unlink("upload/" . $query->berkas);
 					
 				}
 					$data = array(
-						'nama_berkas'	=> $berkas,
+						'berkas'	=> $berkas,
 						'proses'		=> $status
 					);
 					$where = array(
@@ -243,7 +246,7 @@ class Verifikasi_Petugas extends MX_Controller {
 				if($this->upload->do_upload('file')){
 					
 					$uploadData = $this->upload->data();
-					$data['nama_berkas'] = $uploadData['file_name'];
+					$data['berkas'] = $uploadData['file_name'];
 					$data['keterangan_berkas'] = $keterangan_berkas[$i];
 					$data['type_berkas'] = $uploadData['file_ext'];
 					$data['ukuran_berkas'] = $uploadData['file_size'];

@@ -1,21 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tanggapan_Petugas extends MX_Controller {
+class User extends MX_Controller {
 	function __construct()
 	{
 		parent::__construct();
 		{
 			$this->load->model(array(
-				'Pengaduan/pengaduan_model'	=> 'pengaduan',
-				'tanggapan_petugas_model'	=> 'tanggapan',
-				'tanggap_model'	=> 'tanggap',
-				// 'dashboard_model'	=> 'dashboard',
-				// 'upload_model',
-				// 'genre/model_genre'	=> 'genre',
-				// 'jenis/model_jenis'	=> 'jenis',
-				// 'judul/model_judul'	=> 'judul',
-				// 'komik/model_komik'	=> 'komik',
+				'user_model'	=> 'user'
 			));
 			$this->load->helper(array('form','url'));
 			$this->load->library('form_validation');
@@ -23,76 +15,136 @@ class Tanggapan_Petugas extends MX_Controller {
 	}
 	function index()
 	{
-		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
-		$data['tanggapan'] = $this->tanggapan->ambil_data()->result_array();
-		$data['tanggap'] = $this->tanggap->ambil_data()->result_array();
-		// $data['user'] = $this->dashboard->ambil_data()->result_array();
-		// $data['genre'] = $this->genre->ambil_data()->result_array();
-		// $data['jenis'] = $this->jenis->ambil_data()->result_array();
-		// $data['komik'] = $this->komik->ambil_data()->result_array();
-		// $data['upload'] = $this->upload_model->ambil_data()->result_array();
-		// $data['total_genre'] = $this->genre->jumlah();
-		// $data['total_jenis'] = $this->jenis->jumlah();
-		// $data['total_judul'] = $this->judul->jumlah();
-		// $data['total_komik'] = $this->komik->jumlah();
-		$this->load->view('index',$data);
+		$data['user'] = $this->user->ambil_data()->result_array();
+		$this->load->view('index', $data);
 	}
 	function index_user()
 	{
-
 		$this->load->view('user');
 	}
 	function tambah()
 	{
-		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
-		$data['tanggapan'] = $this->tanggapan->ambil_data()->result_array();
-		$this->load->view('tambah',$data);
+		$this->load->view('tambah');
 	}
 	function tambah_aksi()
 	{
-		$pengaduan = $this->input->post('pengaduan');
-		$tanggapan = $this->input->post('tanggapan');
-		$data = array(
-			'id_pengaduan' => $pengaduan,
-			'tanggapan' => $tanggapan,
-		);
-		$this->tanggapan->input_data($data,'penanggapan');
-		$this->session->set_flashdata('msg','Berhasil Tambah Data');
-		redirect('Tanggapan_Petugas');
+		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required');
+		$this->form_validation->set_rules('nik', 'NIK', 'trim|required');
+		$this->form_validation->set_rules('role', 'Role', 'trim|required');
+
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[user.email]', ['is_unique' => 'This email has already registered!']);
+
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|matches[password2]', ['matches' => 'Password not match!', 'min_length' => 'Password too short!']);
+
+		$this->form_validation->set_rules('password2', 'Password', 'trim|required|matches[password]');
+
+		if ($this->form_validation->run() == false) {
+			$data['title'] = 'Registrasi Pengaduan Masyarakat';
+			$this->load->view('template/login_header', $data);
+			$this->load->view('registration');
+			$this->load->view('Admin/js');
+		}
+		else
+		{
+			$config['upload_path']		= './upload/';
+			$config['allowed_types']	= 'jpg|png|jpeg|tmp';
+			$config['max_size']			= 976563;
+			$config['max_width']		= 4320;
+			$config['max_height']		= 7680;
+			$config['encrypt_name']		= TRUE;
+			$this->load->library('upload',$config);
+			if(! $this->upload->do_upload('berkas'))
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('Auth/registration',$error);
+			}else{
+				$_data = array('upload_data' => $this->upload->data());
+				$data = [
+					'nama_berkas'	=> $_data['upload_data']['file_name'],
+					'fullname'		=> htmlspecialchars($this->input->post('fullname', true)),
+					'nik'			=> htmlspecialchars($this->input->post('nik', true)),
+					'telp'			=> htmlspecialchars($this->input->post('telp', true)),
+					'email'			=> htmlspecialchars($this->input->post('email', true)),
+					'password'		=> password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+				];
+
+			$this->db->insert('petugas', $data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulations! your account has been created. Please login!</div>');
+			redirect('Tambah_Petugas', 'refresh');
+			}
+		}	
 	}
-	function hapus($id_tanggapan)
+	function hapus($id)
 	{
-		$where = array('id_tanggapan' => $id_tanggapan);
-		$this->tanggap->hapus_data($where,'penanggapan');
+		$where = array('id'=> $id);
+		$this->user->hapus_data($where,'user');
 		$this->session->set_flashdata('msg','Data Berhasil di Hapus');
-		redirect('Tanggapan_Petugas');
+		redirect('http://localhost/laporan/User');
 	}
-	function edit($id_tanggapan)
+	function edit($id)
 	{
 		$where = array('id' => $id);
-		$data['tanggapan'] = $this->tanggapan->edit_data($where, 'penanggapan')->result();
-		$data['tanggap'] = $this->tanggap->edit_data($where, 'penanggapan')->result();
-		$this->load->view('more',$data);
+		$data['petugas'] = $this->tambah_petugas->edit_data($where,'petugas')->result();
+		$this->load->view('edit',$data);
 	}
 	function update()
 	{
 		$id 		= $this->input->post('id');
-		$nama 		= $this->input->post('nama');
-		$penerbit 	= $this->input->post('penerbit');
-		$penulis 	= $this->input->post('penulis');
+		$fullname 	= $this->input->post('fullname');
+		$email 		= $this->input->post('email');
+		$telp 		= $this->input->post('telp');
+		$nik 		= $this->input->post('nik');
+		$role 		= $this->input->post('role');
+		$berkas 	= $_FILES['berkas']['name'];
 
-		$data = array(
-			'nama' 		=> $nama,
-			'penerbit' 	=> $penerbit,
-			'penulis' 	=> $penulis
-		);
+		$query = $this->db->get_where('pengaduan', ['id' => $id])->row();
 
-		$where = array(
-			'id' => $id
-		);
+		if ($berkas == null) {
+			$data = array(
+			'telp' 		=> $telp,
+			'role'		=> $role
+			);
 
-		$this->dashboard->update_data($where,$data,'rincian_buku');
-		redirect('http://localhost:8080/hmvc2/');
+			$where = array(
+				'id' => $id
+			);
+
+			$this->tambah_petugas->update_data($where,$data,'petugas');
+			redirect('Tambah_Petugas');
+			}
+			else{	
+
+				$config['upload_path']		= './upload/';
+				$config['allowed_types']	= 'jpg|png|jpeg|tmp';
+				$config['max_size']			= 976563;
+				$config['max_width']		= 4320;
+				$config['max_height']		= 7680;
+				$config['encrypt_name']		= TRUE;
+
+				$this->load->library('upload',$config);
+
+				if(! $this->upload->do_upload('berkas')){
+					echo 'Anda Belum Update';
+				}else{
+					$berkas = $this->upload->data('file_name');
+	                unlink("upload/" . $query->nama_berkas);
+					
+				}
+					$data = array(
+						'nama_berkas'	=> $berkas,
+						'telp'	=> $telp,
+						'role'		=> $role
+					);
+					$where = array(
+						'id' => $id
+					);
+					$this->tambah_petugas->update_data($where, $data,'petugas');
+			}
+					$this->session->set_flashdata('msg','Data Berhasil di Update');
+					redirect('Tambah_Petugas');
+		
+
+		
 
 	}
 	function index_upload()
@@ -137,7 +189,7 @@ class Tanggapan_Petugas extends MX_Controller {
 		if($query){
 			unlink("upload/*".$_id->nama_berkas);
 		}
-		redirect('http://localhost:8080/hmvc2/');
+		redirect('http://localhost:8080/laporan/Tambah_Petugas');
 	}
 	function tampil_edit($id)
 	{
@@ -175,7 +227,7 @@ class Tanggapan_Petugas extends MX_Controller {
 			),array('id' => $this->input->post('id'))
 		);
 			$this->session->set_flashdata('msg','Data Berhasil di Update');
-			redirect('http://localhost:8080/hmvc2/');
+			redirect('http://localhost:8080/laporan/Tambah_Petugas');
 		}
 		$data['ambil_data'] = $this->upload_model->get_by_id($id);
 		$this->load->view('edit_upload',$data);

@@ -28,6 +28,12 @@ class tanggapan_admin_model extends MY_loader
 		$this->db->where($where);
 		$this->db->update($table,$data);
 	}
+	function jumlah()
+	{
+		$query = $this->db->get('penanggapan');
+		$jumlah = $query->num_rows();
+		return $jumlah;
+	}
 }
 
 ?>

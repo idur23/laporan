@@ -19,6 +19,7 @@
 		                	<th width="5%">No</th>
 		                	<th width="15%">Tanggal Pengaduan</th>
 		                	<th width="20%">Foto</th>
+		                	<th width="15%">Jenis Laporan</th>
 		                	<th width="15%">Judul</th>
 		                	<th width="10%">Status</th>
 		                	<th>Aksi</th>
@@ -29,11 +30,12 @@
 		            	<tr>
 		            		<td><?php echo $no++ ?></td>
 		            		<td><?php echo date("d-m-Y", strtotime($value['tanggal'])); ?></td>
-		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['nama_berkas'] ?>" width="100px" height="100px"></td>
+		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="100px" height="100px"></td>
+		            		<td><?php echo $value['jenis_pengaduan'] ?></td>
 		            		<td><?php echo $value['judul'] ?></td>
 		            		<td><?php echo $value['proses'] ?></td>
 		            		<td>
-								<a href="<?php echo base_url('Verifikasi_Admin/tampil_edit/'.$value['id']); ?>"><button class="btn btn-info">More</button></a>
+								<a href="<?php echo base_url('Verifikasi_Admin/tampil_edit/'.$value['id']); ?>"><button class="btn btn-info">Lainnya</button></a>
 								<a href="<?php echo base_url('Verifikasi_Admin/hapus_upload/'.$value['id']); ?>"><button class="btn btn-danger">Hapus</button></a>
 								<a href="<?php echo base_url('Verifikasi_Admin/tanggapan/'.$value['id']); ?>"><button class="btn btn-warning">Tanggapan</button></a>
 							</td>

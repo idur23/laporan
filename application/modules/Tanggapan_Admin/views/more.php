@@ -27,32 +27,33 @@
 						<tr>
 							<td>Judul Pengaduan</td>
 							<td>
-								<input type="hidden" name="id" value="<?php echo $value->id ?>">
-								<input type="text" readonly class="form-control" placeholder="Judul" id="judul" name="judul" value="<?php echo $value->judul ?>">
+								<input type="hidden" name="id" value="<?php echo $value->id_tanggapan ?>">
+								<input type="text" readonly class="form-control" placeholder="Judul" id="judul" name="judul" value="<?php echo $value->judul?>">
 							</td>
 						</tr>
 						<tr>
 							<td>Tanggal Pengaduan</td>
 							<td>
-								<input type="text" class="form-control" placeholder="Tanggal" id="tanggal" name="tanggal" value="<?php echo $value->tanggal ?>" readonly >
+								<input type="text" class="form-control" placeholder="Tanggal" id="tanggal" name="tanggal" value="" readonly >
 							</td>
 						</tr>
 						<tr>
 							<td>NIK Pengadu</td>
 							<td>
-								<input type="text" class="form-control" placeholder="NIK" id="nik" name="nik" value="<?php echo $value->nik ?>" readonly >
+								<input type="text" class="form-control" placeholder="NIK" id="nik" name="nik" value="" readonly >
 							</td>
 						</tr>
 						<tr>
 							<td>Isi Pengaduan</td>
 							<td>
-								<textarea type="text" class="form-control" placeholder="Isi Tanggapan" id="isi" name="isi" readonly><?php echo $value->isi ?></textarea>
+								<textarea type="text" class="form-control" placeholder="Isi Tanggapan" id="isi" name="isi" readonly></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td>Tanggal Tanggapan</td>
 							<td>
-								<input type="text" class="form-control" placeholder="TAnggal Tanggapan" id="tanggal_tanggapan" name="tanggal_tanggapan" value="<?php echo $value->tanggal_tanggapan ?>" readonly >
+								<input type="text" class="form-control" placeholder="TAnggal Tanggapan" id="tanggal_tanggapan" name="tanggal_tanggapan" value="<?php echo date(
+								"d-m-Y",strtotime($value->tanggal_tanggapan)) ?>" readonly >
 							</td>
 						</tr>
 						<tr>
@@ -65,7 +66,7 @@
 							<td></td>
 							<td>
 								<button class="btn btn-info" type="submit">Simpan</button>
-								<a href="<?php echo base_url('Tanggapan_Admin'); ?>"><button class="btn btn-danger">Batal</button></a>
+								<a href="<?php echo base_url('Tanggapan_Petugas'); ?>"><button class="btn btn-danger">Batal</button></a>
 							</td>
 						</tr>
 					</table>

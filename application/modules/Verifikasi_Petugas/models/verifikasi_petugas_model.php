@@ -10,6 +10,13 @@ class verifikasi_petugas_model extends MY_loader
 	{
 		return $this->db->get('pengaduan');
 	}
+	function ambil()
+	{
+		$this->db->select('*');
+		$this->db->from('pengaduan');
+		$this->db->join('jenis','pengaduan.id_jenis=jenis.idj');
+		return $this->db->get();
+	}
 	function input_data($data,$table)
 	{
 		$this->db->insert($table,$data);

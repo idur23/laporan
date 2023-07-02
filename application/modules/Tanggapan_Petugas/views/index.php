@@ -14,23 +14,29 @@
 		      </div>
 		      <div class="container">
 		        <table id="table" class="table" border="1" cellspacing="0" width="100%">
+		      	<?php echo $this->session->flashdata('msg'); ?>
+		        	<thead>
 		                <tr>
 		                	<th>No</th>
+		                	<th>Foto</th>
+		                	<th>Judul</th>
 		                	<th>Tanggal</th>
-		                	<th>Judul Pengaduan</th>
+		                	<th>Jenis Pengaduan</th>
 		                	<th>Isi Tanggapan</th>
 		                	<th>Aksi</th>
 		                </tr>
+		            </thead>
 		            	<?php $no=1; ?>
-	            		<?php foreach ($tanggap as $key => $val) {?>
+	            		<?php foreach ($tanggap as $key => $value) {?>
 		            	<tr>
 		            		<td><?php echo $no++ ?></td>
-		            		<td><?php echo date("d-m-Y", strtotime($val['tanggal_tanggapan'])); ?></td>
-		            		<td><?php echo $val['judul'] ?></td>
-		            		<td><?php echo $val['tanggapan'] ?></td>
+		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="100px" height="100px"></td>
+		            		<td><?php echo $value['judul'] ?></td>
+		            		<td><?php echo date("d-m-Y", strtotime($value['tanggal_tanggapan'])); ?></td>
+		            		<td><?php echo $value['jenis_pengaduan'] ?></td>
+		            		<td><?php echo $value['tanggapan'] ?></td>
 		            		<td>
-								<a href="<?php echo base_url('tanggapan_petugas/edit/'.$val['id_tanggapan']); ?>"><button class="btn btn-info">More</button></a>
-								<a href="<?php echo base_url('tanggapan_petugas/hapus/'.$val['id_tanggapan']); ?>"><button class="btn btn-danger">Hapus</button></a>
+								<a href="<?php echo base_url('tanggapan_Petugas/hapus/'.$value['id_tanggapan']); ?>"><button class="btn btn-danger">Hapus</button></a>
 							</td>
 		            	</tr>
 		            <?php } ?>

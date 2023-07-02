@@ -1,4 +1,5 @@
 <?php $this->load->view('header') ?>
+<?php echo $this->session->flashdata('msg'); ?>
   <body>
   
   <div class="site-wrap">

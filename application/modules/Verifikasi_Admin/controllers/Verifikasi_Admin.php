@@ -7,8 +7,9 @@ class Verifikasi_Admin extends MX_Controller {
 		parent::__construct();
 		{
 			$this->load->model(array(
-				'Pengaduan/pengaduan_model'	=> 'pengaduan',
-				'Tanggapan_Petugas/tanggapan_petugas_model'	=> 'tanggapan',
+				'Verifikasi_Admin/verifikasi_admin_model' => 'Verifikasi_Admin',
+				'tanggapan_admin/tanggap_model'	=> 'tanggapan',
+				'pengaduan/pengaduan_model'	=> 'pengaduan'
 				// 'upload_model',
 				// 'genre/model_genre'	=> 'genre',
 				// 'jenis/model_jenis'	=> 'jenis',
@@ -21,7 +22,8 @@ class Verifikasi_Admin extends MX_Controller {
 	}
 	function index()
 	{
-		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
+		$data['pengaduan'] = $this->Verifikasi_Admin->ambil()->result_array();
+		$data['penanggapan'] = $this->tanggapan->ambil_data()->result_array();
 		// $data['genre'] = $this->genre->ambil_data()->result_array();
 		// $data['jenis'] = $this->jenis->ambil_data()->result_array();
 		// $data['komik'] = $this->komik->ambil_data()->result_array();
@@ -52,7 +54,9 @@ class Verifikasi_Admin extends MX_Controller {
 			'tanggapan' => $tanggapan,
 		);
 		$this->tanggapan->input_data($data,'penanggapan');
-		$this->session->set_flashdata('msg','Berhasil Tambah Data');
+		$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
+  Data Berhasil Di tambahkan
+</div>');
 		redirect('Tanggapan_Admin');
 	}
 	function hapus($id)
@@ -65,13 +69,13 @@ class Verifikasi_Admin extends MX_Controller {
 	function edit($id)
 	{
 		$where = array('id' => $id);
-		$data['pengaduan'] = $this->pengaduan->edit_data($where,'pengaduan')->result();
+		$data['pengaduan'] = $this->Verifikasi_Admin->edit_data($where,'pengaduan')->result();
 		$this->load->view('edit',$data);
 	}
 	function tanggapan($id)
 	{
 		$where = array('id' => $id);
-		$data['pengaduan'] = $this->pengaduan->edit_data($where,'pengaduan')->result();
+		$data['pengaduan'] = $this->Verifikasi_Admin->edit_data($where,'pengaduan')->result();
 		$this->load->view('tanggapan',$data);
 	}
 	function update()
@@ -134,6 +138,7 @@ class Verifikasi_Admin extends MX_Controller {
 	{
 		$_id = $this->db->get_where('pengaduan',['id'=>$id])->row();
 		$query = $this->db->delete('pengaduan',['id'=>$id]);
+		$query = $this->db->delete('penanggapan',['id_pengaduan'=>$id]);
 		if($query){
 			unlink("upload/".$_id->nama_berkas);
 		}
@@ -142,7 +147,7 @@ class Verifikasi_Admin extends MX_Controller {
 	function tampil_edit($id)
 	{
 		$where = array('id' => $id);
-		$data['pengaduan'] = $this->pengaduan->edit_data($where,'pengaduan')->result();
+		$data['pengaduan'] = $this->Verifikasi_Admin->edit_data($where,'pengaduan')->result();
 		$this->load->view('edit',$data);
 	}
 	function upload_edit()
@@ -164,13 +169,13 @@ class Verifikasi_Admin extends MX_Controller {
 				'isi'			=> $isi,
 				'judul'			=> $judul,
 				'nik'			=> $nik,
-				'nama_berkas'	=> $old,
+				'berkas'		=> $old,
 				'proses'		=> $status
 			);
 			$where = array(
 				'id' => $id
 			);
-			$this->pengaduan->update_data($where, $data,'pengaduan');
+			$this->Verifikasi_Admin->update_data($where, $data,'pengaduan');
 					$this->session->set_flashdata('msg','Data Berhasil di Update');
 					redirect('Verifikasi_Admin');
 		

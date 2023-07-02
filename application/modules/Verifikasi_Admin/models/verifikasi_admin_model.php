@@ -8,7 +8,14 @@ class verifikasi_admin_model extends MY_loader
 	
 	function ambil_data()
 	{
-		return $this->db->query("pengaduan");
+		return $this->db->get('pengaduan');
+	}
+	function ambil()
+	{
+		$this->db->select('*');
+		$this->db->from('pengaduan');
+		$this->db->join('jenis','pengaduan.id_jenis=jenis.idj');
+		return $this->db->get();
 	}
 	function input_data($data,$table)
 	{
