@@ -31,25 +31,13 @@
 					<tr>
 						<th width="20%">Gambar Pengaduan</th>
 						<td>
-							<img src="<?php echo base_url(); ?>upload/<?php echo $value->nama_berkas; ?>" width="100px" height="100px">
+							<img src="<?php echo base_url(); ?>upload/<?php echo $value->berkas; ?>">
 						</td>
 					</tr>
 					<tr>
 						<th width="20%">Jenis Pengaduan</th>
 						<td>
 							<?php echo $value->jenis_pengaduan; ?>
-						</td>
-					</tr>
-					<tr>
-						<th width="20%">Kota Tujuan Pengadu</th>
-						<td>
-							<?php echo $value->kota; ?>
-						</td>
-					</tr>
-					<tr>
-						<th width="20%">Pemerintah Tujuan Pengadu</th>
-						<td>
-							<?php echo $value->nama_instansi; ?>
 						</td>
 					</tr>
 					<tr>
