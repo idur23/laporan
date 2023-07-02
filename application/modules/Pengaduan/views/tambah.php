@@ -40,27 +40,7 @@
 							<td>
 								<select class="form-control" name="jenis" id="jenis">
 									<?php foreach ($jenis as $key => $value) {?>
-										<option value="<?php echo $value['id'] ?>"><?php echo $value['jenis_pengaduan'] ?></option>
-									<?php } ?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>Tujuan Instansi</td>
-							<td>
-								<select class="form-control" name="instansi" id="instansi">
-									<?php foreach ($instansi as $key => $value1) {?>
-										<option value="<?php echo $value1['id'] ?>"><?php echo $value1['nama_instansi'] ?></option>
-									<?php } ?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>Kota / Kabupaten tujuan</td>
-							<td>
-								<select class="form-control" name="kota" id="kota">
-									<?php foreach ($kota as $key => $value2) {?>
-										<option value="<?php echo $value2['id'] ?>"><?php echo $value2['kota'] ?></option>
+										<option value="<?php echo $value['idj'] ?>"><?php echo $value['jenis_pengaduan'] ?></option>
 									<?php } ?>
 								</select>
 							</td>
