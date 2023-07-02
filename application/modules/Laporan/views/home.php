@@ -19,7 +19,7 @@
 		        	<label> Jenis Pengaduan </label><br>
 		        	<select class="form-control" name="jenis" id="jenis" required="">
 						<?php foreach ($jenis as $key => $value) {?>
-							<option value="<?php echo $value['id'] ?>"><?php echo $value['jenis_pengaduan'] ?></option>
+							<option value="<?php echo $value['idj'] ?>"><?php echo $value['jenis_pengaduan'] ?></option>
 						<?php } ?>
 					</select>
 		        	<input type="hidden" name="nilaifilter" value="1">
