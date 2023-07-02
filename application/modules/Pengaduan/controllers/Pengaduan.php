@@ -7,11 +7,12 @@ class Pengaduan extends MX_Controller {
 		parent::__construct();
 		{
 			$this->load->model(array(
-				'pengaduan_model'			=> 'pengaduan',
-				'Dashboard/dashboard_model'	=> 'dashboard',
-				'Kota/kota_model'			=> 'kota',
-				'Jenis/jenis_model'			=> 'jenis',
-				'Instansi/instansi_model'	=> 'instansi',
+				'pengaduan_model'				=> 'pengaduan',
+				'Dashboard/dashboard_model'		=> 'dashboard',
+				'tanggapan_admin/tanggap_model'	=> 'tanggapan',
+				'jenis/jenis_model'				=> 'jenis'
+				// 'Kota/kota_model'			=> 'kota',
+				// 'Instansi/instansi_model'	=> 'instansi',
 				// 'jenis/model_jenis'	=> 'jenis',
 				// 'judul/model_judul'	=> 'judul',
 				// 'komik/model_komik'	=> 'komik',
@@ -24,6 +25,7 @@ class Pengaduan extends MX_Controller {
 	{
 		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
 		$data['user'] = $this->dashboard->ambil_data()->result_array();
+		$data['penanggapan'] = $this->tanggapan->ambil_data()->result_array();
 		// $data['jenis'] = $this->jenis->ambil_data()->result_array();
 		// $data['komik'] = $this->komik->ambil_data()->result_array();
 		// $data['upload'] = $this->upload_model->ambil_data()->result_array();
@@ -41,8 +43,6 @@ class Pengaduan extends MX_Controller {
 	{
 		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
 		$data['jenis'] = $this->jenis->ambil_data()->result_array();
-		$data['instansi'] = $this->instansi->ambil_data()->result_array();
-		$data['kota'] = $this->kota->ambil_data()->result_array();
 		$this->load->view('tambah',$data);
 	}
 	function tambah_aksi()
@@ -122,13 +122,11 @@ class Pengaduan extends MX_Controller {
 		}else{
 			$_data = array('upload_data' => $this->upload->data());
 			$data = array(
-				'nama_berkas'	=> $_data['upload_data']['file_name'],
+				'berkas'		=> $_data['upload_data']['file_name'],
 				'isi'			=> $this->input->post('isi'),
 				'nik'			=> $this->input->post('nik'),
 				'judul'			=> $this->input->post('judul'),
 				'id_jenis'		=> $this->input->post('jenis'),
-				'id_kota'		=> $this->input->post('kota'),
-				'id_instansi'	=> $this->input->post('instansi'),
 			);
 			// $data['nama_berkas']		= $this->upload->data("file_name");
 			// $data['keterangan_berkas']	= $this->input->post('keterangan_berkas');
@@ -145,7 +143,7 @@ class Pengaduan extends MX_Controller {
 		$_id = $this->db->get_where('tb_berkas',['id'=>$id])->row();
 		$query = $this->db->delete('tb_berkas',['id'=>$id]);
 		if($query){
-			unlink("upload/*".$_id->nama_berkas);
+			unlink("upload/".$_id->nama_berkas);
 		}
 		redirect('http://localhost:8080/hmvc2/');
 	}
