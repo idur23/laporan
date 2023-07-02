@@ -13,26 +13,102 @@
 		        <h1 class="h2">Dashboard</h1>
 		      </div>
 		      <div class="container">
-		        <h3>USER</h3>
-		        <table id="table" class="table" border="1" cellspacing="0" width="100%">
-		        	<thead>
-		                <tr>
-		                	<th>No</th>
-		                	<th>Fullname</th>
-		                	<th>Email</th>
-		                	<th>NIK</th>
-		                </tr>
-		            </thead>
-		            	<?php $no=1; ?>
-		            	<?php foreach ($user as $key => $value) {?>
-		            	<tr>
-		            		<td><?php echo $no++ ?></td>
-		            		<td><?php echo $value['fullname'] ?></td>
-		            		<td><?php echo $value['email'] ?></td>
-		            		<td><?php echo $value['nik'] ?></td>
-		            	</tr>
-		            <?php } ?>
-		        </table>
+		      	<div class="row">
+		      		
+	        		<div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <a href="<?php echo base_url('Tambah_Petugas') ?>">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Jumlah Petugas</div>
+                                        </a>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_petugas?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	        		<div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <a href="<?php echo base_url('jenis') ?>">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Jumlah Jenis Pengaduan</div>
+                                        </a>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_jenis?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	        		<div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <a href="<?php echo base_url('Verifikasi_Admin') ?>">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Jumlah Pengaduan</div>
+                                        </a>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_pengaduan?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+		      	</div>
+		      	<div class="row">
+		      		
+	        		<div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <a href="<?php echo base_url('Dashboard') ?>">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Jumlah User</div>
+                                        </a>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_rakyat?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	        		<div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <a href="<?php echo base_url('Tanggapan_admin') ?>">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Jumlah tanggapan</div>
+                                        </a>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_tanggapan?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+		      	</div>
 		    </div>
 		  	</main>
 		</div>
