@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 
  */
-class dashboard_model extends MY_loader
+class dashboard_rakyat_model extends MY_loader
 {
 	
 	function ambil_data()
@@ -27,6 +27,12 @@ class dashboard_model extends MY_loader
 	{
 		$this->db->where($where);
 		$this->db->update($table,$data);
+	}
+	function jumlah()
+	{
+		$query = $this->db->get('user');
+		$jumlah = $query->num_rows();
+		return $jumlah;
 	}
 }
 
