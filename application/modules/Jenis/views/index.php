@@ -32,8 +32,8 @@
 							<td><?php echo $no++ ?></td>
 							<td><?php echo $value['jenis_pengaduan'] ?></td>
 							<td>
-								<a href="<?php echo base_url('Jenis/edit/'.$value['id']); ?>"><button class="btn btn-info">Edit</button></a>
-								<a href="<?php echo base_url('Jenis/hapus/'.$value['id']); ?>"><button class="btn btn-danger">Hapus</button></a>
+								<a href="<?php echo base_url('Jenis/edit/'.$value['idj']); ?>"><button class="btn btn-info">Edit</button></a>
+								<a href="<?php echo base_url('Jenis/hapus/'.$value['idj']); ?>"><button class="btn btn-danger">Hapus</button></a>
 							</td>
 		            	</tr>
 		            <?php } ?>
