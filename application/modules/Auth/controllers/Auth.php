@@ -127,11 +127,9 @@
 		}
 
 		public function logout(){
-			//hapus session
-			$this->session->unset_userdata('email');
-			$this->session->unset_userdata('role');
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logout!</div>');
-			redirect('auth');
+			$this->session->sess_destroy();
+			$this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">You have been logout!</div>');
+			redirect('utama');
 		}
 	}
 ?>
