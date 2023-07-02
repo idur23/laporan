@@ -50,22 +50,22 @@ class Jenis extends MX_Controller {
 		$this->session->set_flashdata('msg','Berhasil Tambah Data');
 		redirect('Jenis');
 	}
-	function hapus($id)
+	function hapus($idj)
 	{
-		$where = array('id'=> $id);
+		$where = array('idj'=> $idj);
 		$this->jenis->hapus_data($where,'jenis');
 		$this->session->set_flashdata('msg','Data Berhasil di Hapus');
 		redirect('Jenis');
 	}
-	function edit($id)
+	function edit($idj)
 	{
-		$where = array('id' => $id);
+		$where = array('idj' => $idj);
 		$data['jenis'] = $this->jenis->edit_data($where,'jenis')->result();
 		$this->load->view('edit',$data);
 	}
 	function update()
 	{
-		$id 		= $this->input->post('id');
+		$idj 		= $this->input->post('idj');
 		$jenis 		= $this->input->post('jenis');
 
 		$data = array(
@@ -73,7 +73,7 @@ class Jenis extends MX_Controller {
 		);
 
 		$where = array(
-			'id' => $id
+			'idj' => $idj
 		);
 
 		$this->jenis->update_data($where,$data,'jenis');
