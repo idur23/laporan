@@ -24,4 +24,4 @@
 	$(document).ready(function () {
     $('#table').DataTable();
 });
-</script>s
+</script>

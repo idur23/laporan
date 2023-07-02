@@ -13,6 +13,12 @@
               Pengaduan
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('tanggapan') ?>">
+              <span data-feather="file"></span>
+              Tanggapan
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
