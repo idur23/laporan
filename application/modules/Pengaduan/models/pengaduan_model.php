@@ -8,9 +8,17 @@ class pengaduan_model extends MY_loader
 	
 	function ambil_data()
 	{
-		return $this->db->query("
-			SELECT * FROM pengaduan order by tanggal desc
-			");
+		$this->db->select('*');
+		$this->db->from('pengaduan');
+
+		return $this->db->get();
+	}
+	function ambil()
+	{
+		$this->db->select('*');
+		$this->db->from('pengaduan');
+		$this->db->join('jenis','jenis.idj=pengaduan.id_jenis');
+		return $this->db->get();
 	}
 	function input_data($data,$table)
 	{
@@ -33,6 +41,12 @@ class pengaduan_model extends MY_loader
 	function get_by_id($id)
 	{
 		$this->db->get_where('pengaduan',array('id'=>$id))->row();
+	}
+	function jumlah()
+	{
+		$query = $this->db->get('pengaduan');
+		$jumlah = $query->num_rows();
+		return $jumlah;
 	}
 }
 
