@@ -40,8 +40,14 @@
 						<tr>
 							<td>Foto</td>
 							<td>
-								<img src="<?php echo base_url(); ?>upload/<?php echo $value->berkas ?>" name="berkas" width="100px" height="100px">
+								<img class="img-fluid" src="<?php echo base_url(); ?>upload/<?php echo $value->berkas ?>" name="berkas" width="200px" height="200px">
 								<input type="hidden" name="old" value="<?php echo $value->berkas ?>">
+							</td>
+						</tr>
+						<tr>
+							<td>Jenis Pengaduan</td>
+							<td>
+								<input type="text" class="form-control" placeholder="NIK" id="nik" name="nik" value="<?php echo $value->jenis_pengaduan ?>" readonly >
 							</td>
 						</tr>
 						<tr>

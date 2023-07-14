@@ -150,6 +150,20 @@ class Verifikasi_Admin extends MX_Controller {
 		$data['pengaduan'] = $this->Verifikasi_Admin->edit_data($where,'pengaduan')->result();
 		$this->load->view('edit',$data);
 	}
+	function proses($id)
+	{
+		$this->db->where('id', $id);
+        $this->db->update('pengaduan', array('proses' => 'proses'));
+		$this->session->set_flashdata('msg','Data Berhasil di Update');
+		redirect('Verifikasi_Admin');
+	}
+	function selesai($id)
+	{
+		$this->db->where('id', $id);
+        $this->db->update('pengaduan', array('proses' => 'selesai'));
+		$this->session->set_flashdata('msg','Data Berhasil di Update');
+		redirect('Verifikasi_Admin');
+	}
 	function upload_edit()
 	{
 		$berkas = $_FILES['berkas']['name'];
@@ -176,15 +190,15 @@ class Verifikasi_Admin extends MX_Controller {
 				'id' => $id
 			);
 			$this->Verifikasi_Admin->update_data($where, $data,'pengaduan');
-					$this->session->set_flashdata('msg','Data Berhasil di Update');
-					redirect('Verifikasi_Admin');
+			$this->session->set_flashdata('msg','Data Berhasil di Update');
+			redirect('Verifikasi_Admin');
 		
 	}
 	function multi_upload()
 	{
 		$this->load->view('multiple_upload');
 	}
-	function proses()
+	function prosess()
 	{
 		$config['upload_path']          = './upload/';
 		$config['allowed_types']        = 'gif|jpg|png';

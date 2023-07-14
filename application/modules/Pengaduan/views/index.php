@@ -23,6 +23,7 @@
 		                <tr>
 		                	<th width="5%">No</th>
 		                	<th width="30%">Foto</th>
+		                	<th width="30%">Jenis Pengaduan</th>
 		                	<th width="15%">Tanggal Pengaduan</th>
 		                	<th width="15%">Judul</th>
 		                	<th width="25%">Isi Laporan</th>
@@ -34,7 +35,8 @@
 		            	<?php foreach ($pengaduan as $key => $value) {?>
 		            	<tr>
 		            		<td><?php echo $no++ ?></td>
-		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="100px" height="150px"></td>
+		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="100px" height="100px"></td>
+		            		<td><?php echo $value['jenis_pengaduan']; ?></td>
 		            		<td><?php echo date("d-m-Y", strtotime($value['tanggal'])); ?></td>
 		            		<td><?php echo $value['judul'] ?></td>
 		            		<td><?php echo $value['isi'] ?></td>

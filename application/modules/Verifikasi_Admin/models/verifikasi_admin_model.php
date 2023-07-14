@@ -15,6 +15,7 @@ class verifikasi_admin_model extends MY_loader
 		$this->db->select('*');
 		$this->db->from('pengaduan');
 		$this->db->join('jenis','pengaduan.id_jenis=jenis.idj');
+		$this->db->order_by('id','desc');
 		return $this->db->get();
 	}
 	function input_data($data,$table)
@@ -28,6 +29,7 @@ class verifikasi_admin_model extends MY_loader
 	}
 	function edit_data($where,$table)
 	{
+		
 		return $this->db->get_where($table,$where);
 	}
 	function update_data($where,$data,$table)

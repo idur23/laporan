@@ -12,6 +12,7 @@ class tanggap_model extends MY_loader
 		$this->db->from('penanggapan');
 		$this->db->join('pengaduan','penanggapan.id_pengaduan=pengaduan.id');
 		$this->db->join('jenis','pengaduan.id_jenis=jenis.idj');
+		$this->db->order_by('id_tanggapan','desc');
 		return $this->db->get();
 		
 	}

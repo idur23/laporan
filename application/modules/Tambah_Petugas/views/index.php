@@ -23,6 +23,7 @@
 		        	<thead>
 		                <tr>
 		                	<th>No</th>
+		                	<th>Foto</th>
 		                	<th>NIK</th>
 		                	<th>Fullname</th>
 		                	<th>Email</th>
@@ -34,6 +35,7 @@
 		            	<?php foreach ($petugas as $key => $value) {?>
 		            	<tr>
 							<td><?php echo $no++ ?></td>
+							<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['nama_berkas'] ?>" width="150px" height="150px" class="img-fluid"></td>
 							<td><?php echo $value['nik'] ?></td>
 							<td><?php echo $value['fullname'] ?></td>
 							<td><?php echo $value['email'] ?></td>

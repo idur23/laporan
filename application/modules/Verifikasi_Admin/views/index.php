@@ -17,8 +17,8 @@
 		        	<thead>
 		                <tr>
 		                	<th width="5%">No</th>
-		                	<th width="15%">Tanggal Pengaduan</th>
 		                	<th width="20%">Foto</th>
+		                	<th width="15%">Tanggal Pengaduan</th>
 		                	<th width="15%">Jenis Laporan</th>
 		                	<th width="15%">Judul</th>
 		                	<th width="10%">Status</th>
@@ -29,13 +29,23 @@
 		            	<?php foreach ($pengaduan as $key => $value) {?>
 		            	<tr>
 		            		<td><?php echo $no++ ?></td>
+		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="200px" height="200px" class="img-fluid"></td>
 		            		<td><?php echo date("d-m-Y", strtotime($value['tanggal'])); ?></td>
-		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="100px" height="100px"></td>
 		            		<td><?php echo $value['jenis_pengaduan'] ?></td>
 		            		<td><?php echo $value['judul'] ?></td>
 		            		<td><?php echo $value['proses'] ?></td>
 		            		<td>
-								<a href="<?php echo base_url('Verifikasi_Admin/tampil_edit/'.$value['id']); ?>"><button class="btn btn-info">Lainnya</button></a>
+		            			<?php
+								    $status = $value['proses'];
+								    if ($status == "belum di proses") {
+								        echo '<a href="'.base_url('Verifikasi_Admin/proses/'.$value['id']).'"><button class="btn btn-info" value="proses">Proses</button></a>';
+								    } else if ($status == "proses") {
+								        echo '<a href="'.base_url('Verifikasi_Admin/selesai/'.$value['id']).'"><button class="btn btn-info" value="selesai">Selesai</button></a>';
+								    } else if ($status == "selesai") {
+								        echo '<button class="btn btn-info" disabled>Selesai</button>';
+								    }
+								?>
+								
 								<a href="<?php echo base_url('Verifikasi_Admin/hapus_upload/'.$value['id']); ?>"><button class="btn btn-danger">Hapus</button></a>
 								<a href="<?php echo base_url('Verifikasi_Admin/tanggapan/'.$value['id']); ?>"><button class="btn btn-warning">Tanggapan</button></a>
 							</td>

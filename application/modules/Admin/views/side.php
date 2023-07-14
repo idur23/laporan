@@ -14,12 +14,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('User') ?>">
-              <span data-feather="file"></span>
-              User
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('Tambah_Petugas') ?>">
               <span data-feather="shopping-cart"></span>
               Tambah Petugas

@@ -61,6 +61,8 @@
 					}
 					else if ($this->session->userdata('role') == 'petugas') {
 						redirect('dashboard_petugas');
+					}else {
+						redirect('dashboard_rakyat');
 					}
 					
 				}

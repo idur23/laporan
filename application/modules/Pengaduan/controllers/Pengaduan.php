@@ -23,7 +23,7 @@ class Pengaduan extends MX_Controller {
 	}
 	function index()
 	{
-		$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
+		$data['pengaduan'] = $this->pengaduan->ambil()->result_array();
 		$data['user'] = $this->dashboard->ambil_data()->result_array();
 		$data['penanggapan'] = $this->tanggapan->ambil_data()->result_array();
 		// $data['jenis'] = $this->jenis->ambil_data()->result_array();
@@ -108,6 +108,13 @@ class Pengaduan extends MX_Controller {
 	{
 		// print_r($_FILES);
 		// exit();
+
+		$this->form_validation->set_rules('berkas', 'berkas', 'trim|required');
+		$this->form_validation->set_rules('nik', 'NIK', 'trim|required');
+		$this->form_validation->set_rules('isi', 'isi', 'trim|required');
+		$this->form_validation->set_rules('judul', 'judul', 'trim|required');
+
+		$this->form_validation->set_rules('password2', 'Password', 'trim|required|matches[password]');
 		$config['upload_path']		= './upload/';
 		$config['allowed_types']	= 'jpg|png|jpeg|tmp';
 		$config['max_size']			= 976563;
@@ -115,10 +122,16 @@ class Pengaduan extends MX_Controller {
 		$config['max_height']		= 7680;
 		$config['encrypt_name']		= TRUE;
 		$this->load->library('upload',$config);
-		if(! $this->upload->do_upload('berkas'))
+		if ($this->form_validation->run() == false) {
+			$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
+			$data['jenis'] = $this->jenis->ambil_data()->result_array();
+			$this->load->view('tambah',$data);
+		}else if(! $this->upload->do_upload('berkas'))
 		{
-			$error = array('error' => $this->upload->display_errors());
-			$this->load->view('tambah',$error);
+			$data = array('error' => $this->upload->display_errors());
+			$data['pengaduan'] = $this->pengaduan->ambil_data()->result_array();
+			$data['jenis'] = $this->jenis->ambil_data()->result_array();
+			$this->load->view('tambah',$data);
 		}else{
 			$_data = array('upload_data' => $this->upload->data());
 			$data = array(
@@ -137,6 +150,7 @@ class Pengaduan extends MX_Controller {
 			$query = $this->db->insert('Pengaduan', $data);
 			redirect('Pengaduan');
 		}
+		
 	}
 	function hapus_upload($id)
 	{
@@ -157,6 +171,7 @@ class Pengaduan extends MX_Controller {
 	{
 		// print_r($_FILES);
 		// exit();
+
 		$id = $this->input->post('id');
 		$config['upload_path']		= './upload/';
 		$config['allowed_types']	= 'jpg|png|jpeg|tmp';

@@ -4,7 +4,7 @@
   
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="<?php echo base_url('Utama'); ?>">Sign out</a>
+      <a class="nav-link" href="<?php echo base_url('Auth/Logout'); ?>">Sign out</a>
     </li>
   </ul>
 </header>

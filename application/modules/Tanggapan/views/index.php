@@ -28,7 +28,7 @@
 	            		<?php foreach ($tanggap as $key => $value) {?>
 		            	<tr>
 		            		<td><?php echo $no++ ?></td>
-		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['nama_berkas'] ?>" width="100px" height="150px"></td>
+		            		<td><img src="<?php echo base_url(); ?>upload/<?php echo $value['berkas'] ?>" width="100px" height="100px"></td>
 		            		<td><?php echo date("d-m-Y", strtotime($value['tanggal_tanggapan'])); ?></td>
 		            		<td><?php echo $value['jenis_pengaduan'] ?></td>
 		            		<td><?php echo $value['judul'] ?></td>

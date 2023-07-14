@@ -40,7 +40,7 @@
 						<tr>
 							<td>Foto</td>
 							<td>
-								<img src="<?php echo base_url(); ?>upload/<?php echo $value->berkas ?>" name="berkas" width="100px" height="100px">
+								<img class="img-fluid" src="<?php echo base_url(); ?>upload/<?php echo $value->berkas ?>" name="berkas" width="150px" height="150px">
 								<input type="hidden" name="old" value="<?php echo $value->berkas ?>">
 							</td>
 						</tr>

@@ -48,16 +48,23 @@
 				if (password_verify($password, $user['password'])) 
 				{
 					$data = [
-						'fullname'			=> $user['fullname'],
-						'email'				=> $user['email'],
-						'nik'				=> $user['nik'],
-						'telp'				=> $user['telp'],
-						'nama_berkas'		=> $user['nama_berkas'],
+						'id'			=> $user['id'],
+						'fullname'		=> $user['fullname'],
+						'email'			=> $user['email'],
+						'nik'			=> $user['nik'],
+						'nama_berkas'	=> $user['nama_berkas'],
+						'role'			=> $user['role'],
+						'telp'			=> $user['telp']
 					];
-					// print_r(var_dump($data));
 					$this->session->set_userdata($data);
-					redirect('dashboard_rakyat');
-					
+					if ($this->session->userdata('role') == 'admin') {
+						redirect('dashboard');
+					}
+					else if ($this->session->userdata('role') == 'petugas') {
+						redirect('dashboard_petugas');
+					}else {
+						redirect('dashboard_rakyat');
+					}
 				}
 
 				//jika password salah
@@ -85,9 +92,7 @@
 
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[user.email]', ['is_unique' => 'This email has already registered!']);
 
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|matches[password2]', ['matches' => 'Password not match!', 'min_length' => 'Password too short!']);
-
-			$this->form_validation->set_rules('password2', 'Password', 'trim|required|matches[password]');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]', ['matches' => 'Password not match!', 'min_length' => 'Password too short!']);
 
 			if ($this->form_validation->run() == false) {
 				$data['title'] = 'Registrasi Pengaduan Masyarakat';
@@ -113,23 +118,25 @@
 					$data = [
 						'nama_berkas'	=> $_data['upload_data']['file_name'],
 						'fullname'		=> htmlspecialchars($this->input->post('fullname', true)),
+						'role'			=> $this->input->post('role'),
 						'nik'			=> htmlspecialchars($this->input->post('nik', true)),
 						'telp'			=> htmlspecialchars($this->input->post('telp', true)),
 						'email'			=> htmlspecialchars($this->input->post('email', true)),
 						'password'		=> password_hash($this->input->post('password'), PASSWORD_DEFAULT)
 					];
 
-				$this->db->insert('user', $data);
+				$this->db->insert('petugas', $data);
 				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulations! your account has been created. Please login!</div>');
-				redirect('auth', 'refresh');
+				redirect('Auth_Petugas', 'refresh');
 				}
 			}	
 		}
 
 		public function logout(){
 			$this->session->sess_destroy();
-			$this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">You have been logout!</div>');
-			redirect('utama');
+			$this->session->set_flashdata('message',
+						'<div class="alert alert-danger" role="alert">You have been logout!</div>');
+			redirect('Auth_Petugas');
 		}
 	}
 ?>

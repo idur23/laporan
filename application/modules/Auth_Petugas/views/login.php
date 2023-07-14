@@ -1,11 +1,11 @@
 <body class="text-center">
     
 <main class="form-signin">
-  <div class="card">
+  <div class="containner">
     <div class="card-body register-card-body">
       <?= $this->session->flashdata('message'); ?>
       <form action="<?= base_url('auth_petugas'); ?>" method="post">
-        <h1 class="h3 mb-3 fw-normal">Login Sebagai Petugas</h1>
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
         <div class="input-group mb-4">
             <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="<?= set_value('email'); ?>">
             <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
@@ -16,6 +16,7 @@
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
       </form>
+      <a href="<?php echo base_url('Auth/registration') ?>"> <button class="w-100 btn btn-lg btn-primary">Register</button></a>
     </div>
   </div>
 </main>

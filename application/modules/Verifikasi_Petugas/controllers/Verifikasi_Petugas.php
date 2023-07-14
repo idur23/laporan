@@ -63,6 +63,20 @@ class Verifikasi_Petugas extends MX_Controller {
 		$data['pengaduan'] = $this->pengaduan->edit_data($where,'pengaduan')->result();
 		$this->load->view('tanggapan',$data);
 	}
+	function proses($id)
+	{
+		$this->db->where('id', $id);
+        $this->db->update('pengaduan', array('proses' => 'proses'));
+		$this->session->set_flashdata('msg','Data Berhasil di Update');
+		redirect('Verifikasi_Petugas');
+	}
+	function selesai($id)
+	{
+		$this->db->where('id', $id);
+        $this->db->update('pengaduan', array('proses' => 'selesai'));
+		$this->session->set_flashdata('msg','Data Berhasil di Update');
+		redirect('Verifikasi_Petugas');
+	}
 	function hapus($id)
 	{
 		$where = array('id'=> $id);
@@ -222,7 +236,7 @@ class Verifikasi_Petugas extends MX_Controller {
 	{
 		$this->load->view('multiple_upload');
 	}
-	function proses()
+	function prosess()
 	{
 		$config['upload_path']          = './upload/';
 		$config['allowed_types']        = 'gif|jpg|png';

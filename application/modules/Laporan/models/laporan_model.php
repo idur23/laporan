@@ -28,7 +28,7 @@ class laporan_model extends MY_loader
 			JOIN jenis
 			ON ".'pengaduan.id_jenis'." ".'='." ".'jenis.idj'."
 			WHERE id_jenis = '$jenis' AND tanggal_tanggapan BETWEEN '$tanggalawal' AND '$tanggalakhir'
-			ORDER BY tanggal_tanggapan ASC
+			ORDER BY tanggal
 			");
 
 		return $query->result();

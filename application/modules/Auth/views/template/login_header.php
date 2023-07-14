@@ -40,6 +40,14 @@
           font-size: 3.5rem;
         }
       }
+      body{
+        background-image: url(<?php echo base_url("upload/pengaduan_banner.png") ?>);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .containner{
+        background-color: rgba(255, 255, 255, 0.5);
+      }
     </style>
 
   

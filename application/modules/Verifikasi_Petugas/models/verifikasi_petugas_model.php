@@ -15,6 +15,7 @@ class verifikasi_petugas_model extends MY_loader
 		$this->db->select('*');
 		$this->db->from('pengaduan');
 		$this->db->join('jenis','pengaduan.id_jenis=jenis.idj');
+		$this->db->order_by('id','desc');
 		return $this->db->get();
 	}
 	function input_data($data,$table)

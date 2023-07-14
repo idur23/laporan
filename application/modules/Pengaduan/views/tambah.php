@@ -27,6 +27,7 @@
 							<td>Judul</td>
 							<td>
 								<input type="text" class="form-control" placeholder="Judul" id="judul" name="judul" >
+								<?= form_error('judul', '<small class="text-danger">', '</small>'); ?>
 							</td>
 						</tr>
 						<tr>
@@ -49,12 +50,15 @@
 							<td>Foto</td>
 							<td>
 							<input type="file" class="form-control" placeholder="Foto" id="berkas" name="berkas" accept="image">
+							<?= form_error('berkas', '<small class="text-danger">', '</small>'); ?>
+
 							</td>
 						</tr>
 						<tr>
 							<td>Isi Laporan</td>
 							<td>
 								<textarea type="text" class="form-control" placeholder="Isi Laporan" id="isi" name="isi"></textarea>
+								<?= form_error('isi', '<small class="text-danger">', '</small>'); ?>
 							</td>
 						</tr>
 						<tr>

@@ -10,7 +10,7 @@
 			<?php $this->load->view('Rakyat/side'); ?>
 			<main class="col-md-9 ms-sm-auto col-lg-8 px-md-1">
 		      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		        <h1 class="h2">Dashboard</h1>
+		        <h1 class="h2">Profil</h1>
 		      </div>
 		      <table class="table" width="100" align="center">
 					<tr>
@@ -20,7 +20,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Fullname</td>
+						<td>Foto</td>
+						<td>
+							<img class="img-fluid" src="<?php echo base_url(); ?>upload/<?php echo $this->session->userdata('nama_berkas') ?>" name="berkas" width="150px" height="150px">
+						</td>
+					</tr>
+					<tr>
+						<td>Nama Lengkap</td>
 						<td>
 						<input type="text" class="form-control" placeholder="Fullname" id="fullname" name="fullname" value="<?php echo $this->session->userdata('fullname') ?>" readonly>
 						</td>

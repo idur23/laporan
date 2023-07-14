@@ -31,7 +31,7 @@
 					<tr>
 						<th width="20%">Gambar Pengaduan</th>
 						<td>
-							<img src="<?php echo base_url(); ?>upload/<?php echo $value->berkas; ?>">
+							<img class="img-fluid" src="<?php echo base_url(); ?>upload/<?php echo $value->berkas; ?>"width="200px" height="200px">
 						</td>
 					</tr>
 					<tr>
